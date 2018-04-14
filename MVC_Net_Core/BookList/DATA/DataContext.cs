@@ -11,6 +11,7 @@ namespace BookList.DATA
        }
 
         public DbSet<Book> Books {get; set;}
+        public DbSet<Movies> Movies { get; set; }
 
 
     }

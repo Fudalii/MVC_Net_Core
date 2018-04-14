@@ -11,9 +11,10 @@ using System;
 namespace BookList.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20180414171036_Movies")]
+    partial class Movies
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,20 +31,6 @@ namespace BookList.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Books");
-                });
-
-            modelBuilder.Entity("BookList.Models.Movies", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Autor");
-
-                    b.Property<string>("Tittle");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Movies");
                 });
 #pragma warning restore 612, 618
         }
