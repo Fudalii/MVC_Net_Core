@@ -25,19 +25,17 @@ namespace RazorPages.Infrastrucutre
 
         public async Task<Book> EditBook(Book book)
         {
-            var Book = await _db.Books.FirstOrDefaultAsync(x => x.Id == book.Id);
-        
             _db.Update(book);
             await _db.SaveChangesAsync();
-
             return book;
         }
 
         public async Task<Book> GetBook(int Id)
         {
-            var Books = await _db.Books.FirstOrDefaultAsync(x => x.Id == Id);
+            return await _db.Books.FirstOrDefaultAsync(m => m.Id == Id);
 
-            return Books;
+            //return _db.Books.Find(Id);
+          
         }
 
         public async Task<IList<Book>> GetBooks()

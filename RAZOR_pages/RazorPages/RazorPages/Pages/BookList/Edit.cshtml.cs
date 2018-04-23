@@ -28,17 +28,23 @@ namespace RazorPages.Pages.BookList
         [BindProperty]
         public Book Book { get; set; }
 
-        public async void OnGet(int Id)
+        public async Task<IActionResult> OnGetAsync(int Id)
         {
             Book = await _booksRepo.GetBook(Id);
-           
+
+            if (Book == null)
+            {
+                return NotFound();
+            }
+            return Page();
         }
 
         public async Task<IActionResult> OnPost()
         {
+          
             if (!ModelState.IsValid)
             {
-                return RedirectToPage();
+                return Page();
             }
 
             await _booksRepo.EditBook(Book);
