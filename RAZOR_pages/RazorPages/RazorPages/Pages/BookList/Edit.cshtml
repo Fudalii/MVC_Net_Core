@@ -1,0 +1,52 @@
+﻿@page
+@model EditModel
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Pages/_Layout.cshtml";
+}
+
+<h2>Create Book</h2>
+
+<form method="post">
+    @Html.AntiForgeryToken()
+
+    @if (!ModelState.IsValid)
+    {
+        <div class="alert alert-danger" role="alert" asp-validation-summary="All">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+    <div class="col col-sm-4">
+        <div class="form-group">
+            <input asp-for="Book.Id" type="text" class="hidden">
+            @Html.DisplayNameFor(x => x.Book.Title)
+            <input asp-for="Book.Title" type="text" class="form-control">
+            <span asp-validation-for="Book.Title" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(x => x.Book.Author)
+            <input asp-for="Book.Author" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(x => x.Book.ISBN)
+            <input asp-for="Book.ISBN" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(x => x.Book.Avaibility)
+            <input asp-for="Book.Avaibility" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(x => x.Book.Price)
+            <input asp-for="Book.Price" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+            <a asp-page="/booklist/index" class="btn btn-success">Back To List</a>
+            <button type="submit" class="btn btn-primary">Zapisz Zmiany</button>
+        </div>
+    </div>
+
+</form>
+

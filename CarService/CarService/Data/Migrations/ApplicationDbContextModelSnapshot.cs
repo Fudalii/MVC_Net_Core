@@ -27,6 +27,10 @@ namespace CarService.Data.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
+                    b.Property<string>("Address");
+
+                    b.Property<string>("City");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
@@ -34,6 +38,10 @@ namespace CarService.Data.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -46,6 +54,8 @@ namespace CarService.Data.Migrations
                         .HasMaxLength(256);
 
                     b.Property<string>("PasswordHash");
+
+                    b.Property<string>("Phone");
 
                     b.Property<string>("PhoneNumber");
 

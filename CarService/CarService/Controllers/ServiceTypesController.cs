@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CarService.Data;
 using CarService.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CarService.Controllers
 {
@@ -51,6 +52,92 @@ namespace CarService.Controllers
             return View(serviceType);
 
         }
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            var Item = await _db.ServiceTypes.FirstOrDefaultAsync(s => s.Id == id);
+
+            if(Item != null)
+            {
+                return View(Item);
+            }
+
+            return RedirectToAction(nameof(Index));
+
+        }
+
+
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+
+            if (id == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            var Item = await _db.ServiceTypes.FirstOrDefaultAsync(s => s.Id == id);
+
+            if (Item != null)
+            {
+                return View(Item);
+            }
+
+            return RedirectToAction(nameof(Index));
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(ServiceType serviceType)
+        {
+            if (ModelState.IsValid)
+            {
+                var Item = await _db.ServiceTypes.FirstOrDefaultAsync();
+
+                _db.ServiceTypes.Update(Item);
+
+                await _db.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(serviceType);
+
+        }
+
+
+        // HTTPPOST: Delete/id
+        [HttpGet, ActionName("Delete")]
+        public async Task<IActionResult> RemoveServiceType(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            var Item = await _db.ServiceTypes.FirstOrDefaultAsync(s => s.Id == id);
+
+            if (Item == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            _db.ServiceTypes.Remove(Item);
+
+            await _db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+
+        }
+
+
+
 
 
 

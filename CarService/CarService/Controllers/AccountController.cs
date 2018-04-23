@@ -13,6 +13,8 @@ using Microsoft.Extensions.Options;
 using CarService.Models;
 using CarService.Models.AccountViewModels;
 using CarService.Services;
+using CarService.Data;
+using CarService.Utility;
 
 namespace CarService.Controllers
 {
@@ -22,6 +24,9 @@ namespace CarService.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly ApplicationDbContext _db;
+
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
 
@@ -29,12 +34,16 @@ namespace CarService.Controllers
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
+            ApplicationDbContext db,
+            RoleManager<IdentityRole> roleManager,
             ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
+            _db = db;
+            _roleManager = roleManager;
         }
 
         [TempData]
@@ -212,6 +221,7 @@ namespace CarService.Controllers
             return View();
         }
 
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -220,10 +230,33 @@ namespace CarService.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Address = model.Address,
+                    City = model.City,
+                    Phone = model.Phone
+                };
+
                 var result = await _userManager.CreateAsync(user, model.Password);
+
                 if (result.Succeeded)
                 {
+                    if (!await _roleManager.RoleExistsAsync(SD.CustomerAndUser))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(SD.CustomerAndUser));
+                    }
+
+                    if (!await _roleManager.RoleExistsAsync(SD.AdminAndUser))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(SD.AdminAndUser));
+                    }
+
+                    await _userManager.AddToRoleAsync(user, SD.AdminAndUser);
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

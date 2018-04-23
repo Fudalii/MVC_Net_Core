@@ -23,5 +23,25 @@ namespace CarService.Models.AccountViewModels
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [MinLength(2)]
+        public string FirstName { get; set; }
+
+        [Required]
+        [MinLength(2)]
+        public string LastName { get; set; }
+
+        [Required]
+        [MinLength(2)]
+        public string Address { get; set; }
+
+        [Required]
+        [MinLength(2)]
+        public string City { get; set; }
+
+        [Required]
+        [MinLength(2)]
+        public string Phone { get; set; }
     }
 }

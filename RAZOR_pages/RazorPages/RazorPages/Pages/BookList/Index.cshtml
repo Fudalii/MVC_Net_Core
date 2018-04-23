@@ -1,0 +1,92 @@
+﻿@page "{Id?}/{handler?}"
+@model IndexModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Book List</h2>
+
+@if (Model.Message != null)
+{
+    <div class="alert alert-success" role="alert" asp-validation-summary="All">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        @Model.Message
+    </div>
+}
+
+<a asp-page="Create" class="btn btn-primary">Create New Book</a>
+
+
+@if (Model.Books.Count() > 0)
+{
+    <form method="post">
+
+        <div>
+            <br />
+            <table class="table table-condensed table-hover">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Books.FirstOrDefault().ISBN)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Books.FirstOrDefault().Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Books.FirstOrDefault().Author)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Books.FirstOrDefault().Avaibility)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Books.FirstOrDefault().Price)
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+
+                @foreach (var item in Model.Books)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => item.ISBN)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.Author)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.Avaibility)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.Price)
+                        </td>
+                        <td>
+                            <a class="btn btn-primary" asp-page="Edit" asp-route-id="@item.Id">Edit</a>
+                            <button class="btn btn-danger" asp-page-handler="Delete" asp-route-id="@item.Id">Delete</button>
+
+                        </td>
+
+                    </tr>
+
+                }
+
+
+
+
+            </table>
+        </div>
+
+
+    </form>
+
+}
+
+else
+{
+    <p>Not found</p>
+}
