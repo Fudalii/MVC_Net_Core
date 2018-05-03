@@ -1,0 +1,8 @@
+﻿@model RestaurantRazor.Models.ButtonPartial
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<a role="button" class="btn @Model.ButtonType" asp-page="@Model.URL" asp-route-id="@Model.ActionParameters">
+    <span class="oi oi-@Model.Icon"></span>
+</a>

@@ -1,0 +1,36 @@
+﻿@model RestaurantRazor.Models.ButtonPartial
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<td>
+
+    <div class="btn-group" role="group">
+
+        @Html.Partial("_ButtonPartial",
+                               new Models.ButtonPartial
+                               {
+                                   URL = "Edit",
+                                   Icon = "pencil",
+                                   ButtonType = "btn-primary",
+                                   Id = Model.Id
+                               })
+        @Html.Partial("_ButtonPartial",
+                             new Models.ButtonPartial
+                             {
+                                 URL = "Details",
+                                 Icon = "browser",
+                                 ButtonType = "btn-success",
+                                 Id = Model.Id
+                             })
+        @*@Html.Partial("_ButtonPartial",
+                            new Models.ButtonPartial
+                            {
+                                URL = "Delete",
+                                Icon = "trash",
+                                ButtonType = "btn-danger",
+                                Id = Model.Id
+                            })*@
+    </div>
+
+</td>

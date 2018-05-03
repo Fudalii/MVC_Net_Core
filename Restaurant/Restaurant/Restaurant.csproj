@@ -1,9 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <UserSecretsId>aspnet-Restaurant-544031EE-703A-46CD-83B2-42EA59217DA7</UserSecretsId>
+    <UserSecretsId>aspnet-Restaurant-55D2DC5B-A85B-492C-A6CA-328F6BE2AC60</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="bootstrap" Version="4.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" PrivateAssets="All" />

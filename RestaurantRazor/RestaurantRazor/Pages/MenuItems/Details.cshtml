@@ -1,0 +1,56 @@
+﻿@page
+@model RestaurantRazor.Pages.MenuItems.DetailsModel
+
+<div>
+    <h4>MenuItem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MenuItem.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MenuItem.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MenuItem.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MenuItem.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MenuItem.Imege)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MenuItem.Imege)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MenuItem.Spicyness)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MenuItem.Spicyness)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MenuItem.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MenuItem.Price)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MenuItem.CategoryType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MenuItem.CategoryType.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MenuItem.FoodType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MenuItem.FoodType.Id)
+        </dd>
+    </dl>
+</div>
+<img src="@Model.MenuItem.Imege" alt="Alternate Text" />
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.MenuItem.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

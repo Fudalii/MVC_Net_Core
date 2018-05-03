@@ -1,0 +1,66 @@
+﻿@page
+@model RestaurantRazor.Pages.CategoryTypes.EditModel
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Pages/_Layout.cshtml";
+}
+
+<h2>Create Food Type</h2>
+
+<form method="post">
+
+    <div class="form-border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"> </div>
+
+        <div class="form-group">
+
+            <div class="row">
+                <div class="col col-sm-2">
+                    <label asp-for="CategoryTypeDTO.Id" class="custom-lable"></label>
+                </div>
+
+                <div class="col col-sm-4">
+                    <input asp-for="CategoryTypeDTO.Id" class="form-control"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-sm-2">
+                    <label asp-for="CategoryTypeDTO.Name" class="custom-lable"></label>
+                </div>
+
+                <div class="col col-sm-4">
+                    <input asp-for="CategoryTypeDTO.Name" class="form-control" />
+                </div>
+                <span asp-validation-for="CategoryTypeDTO.Name" class="text-danger"></span>
+            </div>
+
+            <div class="row">
+
+                <div class="col col-sm-2">
+                    <label asp-for="CategoryTypeDTO.DisplayOrder" class="custom-lable"></label>
+                </div>
+
+                <div class="col col-sm-4">
+                    <input asp-for="CategoryTypeDTO.DisplayOrder" class="form-control" />
+                </div>
+                <span asp-validation-for="CategoryTypeDTO.DisplayOrder" class="text-danger"></span>
+            </div>
+
+            <br />
+            <div class="form-group">
+                <button type="submit" value="Edit" class="btn btn-success"> Edit Category</button>
+                <td> <a asp-page-handler="Remove" asp-route-id="@Model.CategoryTypeDTO.Id">  USUŃ </a> </td>
+                <a asp-page="./Index" class="btn btn-primary"> Back to List</a>
+            </div>
+        </div>
+    </div>
+
+
+
+</form>
+
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial.cshtml"); }
+}
